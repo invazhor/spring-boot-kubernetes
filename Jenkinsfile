@@ -138,19 +138,18 @@ pipeline {
                   echo varBUILD_USER_EMAIL
                 }
               }
-            }
-        }
+         }
+    }
         // Post-build actions
-        post {
-            always {
-                script {
-                    BUILD_USER = varBUILD_USER
-                }
-                echo 'I will always say hello in the console.'
-                slackSend channel: '#notificaction-jenkins',
-                    color: COLOR_MAP[currentBuild.currentResult],
-                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
-            }
-        }     
-    }   
+    post {
+        always {
+           script {
+              BUILD_USER = varBUILD_USER
+           }
+            echo 'I will always say hello in the console.'
+            slackSend channel: '#notificaction-jenkins',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
+        }
+    }      
 }
